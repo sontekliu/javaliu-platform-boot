@@ -1,5 +1,9 @@
 .idea/
 target/
 *.iml
-/**/*.iml
-/**/target/
+platform-base/*.iml
+platform-base/target/
+platform-parent/*.iml
+platform-parent/target/
+platform-web/*.iml
+platform-web/target/
