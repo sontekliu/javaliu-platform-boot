@@ -12,6 +12,7 @@ public class App extends SpringBootServletInitializer {
         SpringApplication.run(App.class, args);
     }
 
+    // 相当于 WEB-INF/web.xml
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(App.class);
