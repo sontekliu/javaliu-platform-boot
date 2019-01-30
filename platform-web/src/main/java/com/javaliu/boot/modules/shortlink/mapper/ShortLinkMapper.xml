@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javaliu.boot.modules.shortlink.mapper.ShortLinkMapper">
+    <resultMap id="shortLink" type="com.javaliu.boot.modules.shortlink.entity.ShortLinkEntity">
+        <id column="id" property="id" jdbcType="BIGINT"></id>
+        <result column="short_key" property="shortKey" jdbcType="VARCHAR"></result>
+        <result column="original_url" property="originalUrl" jdbcType="VARCHAR"></result>
+        <result column="expire_date_time" property="expireDateTime" jdbcType="TIMESTAMP"></result>
+        <result column="biz_type" property="bizType" jdbcType="INTEGER"></result>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"></result>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"></result>
+        <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP"></result>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"></result>
+        <result column="update_date_time" property="updateDateTime" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+    <sql id="all_dict_column">
+        id, short_key, original_url, expire_date_time, biz_type, delete_flag, create_by, create_date_time, update_by, update_date_time
+    </sql>
+
+    <insert id="insertOne" parameterType="com.javaliu.boot.modules.shortlink.entity.ShortLinkEntity">
+        INSERT INTO sms_short_link(id, id, short_key, original_url, expire_date_time, biz_type,
+        create_by, create_date_time, update_by, update_date_time)
+        VALUES (${id}, #{shortKey}, #{originalUrl}, #{expireDateTime}, ${bizType}, ${deleteFlag},
+        ${createBy}, #{createDateTime}, ${updateBy}, #{updateDateTime})
+    </insert>
+</mapper>
