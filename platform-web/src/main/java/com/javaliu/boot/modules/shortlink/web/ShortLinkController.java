@@ -1,6 +1,8 @@
 package com.javaliu.boot.modules.shortlink.web;
 
-import com.javaliu.boot.modules.shortlink.entity.ShortLinkEntity;
+import com.javaliu.boot.base.exception.wrapper.ServiceWrapperException;
+import com.javaliu.boot.base.result.ResultOne;
+import com.javaliu.boot.base.result.ResultUtils;
 import com.javaliu.boot.modules.shortlink.service.IShortLinkService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Controller
@@ -22,19 +25,16 @@ public class ShortLinkController {
 
     @ResponseBody
     @RequestMapping(value = "createShortKey")
-    public String createShortKey(){
-        ShortLinkEntity shortLinkEntity = new ShortLinkEntity();
-        shortLinkEntity.setId(1L);
-        shortLinkEntity.setShortKey("abcd");
-        shortLinkEntity.setOriginalUrl("https://www.javaliu.com");
-        shortLinkEntity.setBizType(2);
-        shortLinkEntity.setExpireDateTime(new Date());
-        shortLinkEntity.setCreateBy(1L);
-        shortLinkEntity.setCreateDateTime(new Date());
-        shortLinkEntity.setUpdateBy(1L);
-        shortLinkEntity.setUpdateDateTime(new Date());
-        shortLinkEntity.setDeleteFlag(0);
-        shortLinkService.addShortLink(shortLinkEntity);
-        return "添加成功";
+    public ResultOne<String> createShortKey(HttpServletRequest request){
+        String originalUrl = request.getParameter("originalUrl");
+        ResultOne<String> resultOne = new ResultOne();
+        try {
+            originalUrl = "https://www.baidu.com";
+            shortLinkService.genShortLink(originalUrl, 1, new Date());
+            resultOne = ResultUtils.successResultOne("String");
+        } catch (ServiceWrapperException e){
+            resultOne = ResultUtils.failResultOne(1, e.getMessage());
+        }
+        return resultOne;
     }
 }

@@ -1,12 +1,19 @@
 package com.javaliu.boot.modules.shortlink.service.impl;
 
+import com.javaliu.boot.base.exception.wrapper.ServiceWrapperException;
+import com.javaliu.boot.kit.IdGenUtils;
 import com.javaliu.boot.modules.shortlink.entity.ShortLinkEntity;
+import com.javaliu.boot.modules.shortlink.kit.Base62;
 import com.javaliu.boot.modules.shortlink.mapper.ShortLinkMapper;
 import com.javaliu.boot.modules.shortlink.service.IShortLinkService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 @Service
 public class ShortLinkServiceImpl implements IShortLinkService {
@@ -16,10 +23,38 @@ public class ShortLinkServiceImpl implements IShortLinkService {
     @Autowired
     private ShortLinkMapper shortLinkMapper;
 
-
     @Override
-    public ShortLinkEntity addShortLink(ShortLinkEntity shortLinkEntity) {
-        shortLinkMapper.insertOne(shortLinkEntity);
+    public ShortLinkEntity genShortLink(String originalUrl, int bizType, Date expireDateTime) {
+        if(null == originalUrl){
+            logger.error("原始连接不能为空");
+            throw new NullPointerException("原始连接不能为空");
+        }
+        if(null == expireDateTime){
+            // 待优化部分 TODO
+            // 默认加一天
+            LocalDateTime localDateTime = LocalDateTime.ofInstant(expireDateTime.toInstant(), ZoneId.systemDefault());
+            localDateTime.plusDays(1);
+            expireDateTime = Date.from(localDateTime.toInstant(localDateTime.atZone(ZoneId.systemDefault()).getOffset()));
+        }
+        ShortLinkEntity shortLinkEntity = new ShortLinkEntity();
+        long id = IdGenUtils.genDefaultSequenceId();
+        shortLinkEntity.setId(id);
+        String shortKey = Base62.toBase62(id);
+        shortLinkEntity.setShortKey(shortKey);
+        shortLinkEntity.setOriginalUrl(originalUrl);
+        shortLinkEntity.setBizType(bizType);
+        shortLinkEntity.setExpireDateTime(expireDateTime);
+        // 待优化部分
+        shortLinkEntity.setCreateBy(1L);
+        shortLinkEntity.setCreateDateTime(new Date());
+        shortLinkEntity.setUpdateBy(1L);
+        shortLinkEntity.setUpdateDateTime(new Date());
+        try{
+            shortLinkMapper.insertOne(shortLinkEntity);
+        } catch (Exception e){
+            logger.error("保存短连接数据异常", e);
+            throw new ServiceWrapperException("保存短连接数据异常", e);
+        }
         return shortLinkEntity;
     }
 }

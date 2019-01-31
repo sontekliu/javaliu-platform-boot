@@ -9,7 +9,7 @@ public class BaseEntity {
     private Date createDateTime;
     private Long updateBy;
     private Date updateDateTime;
-    private int deleteFlag;
+    private int deleteFlag = 0;  // 默认有效
 
     public Long getId() {
         return id;

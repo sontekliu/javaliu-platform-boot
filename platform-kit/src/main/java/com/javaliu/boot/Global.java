@@ -1,4 +1,4 @@
 package com.javaliu.boot;
 
-public class T {
+public class Global {
 }
