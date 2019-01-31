@@ -104,7 +104,7 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <defaultGoal>package</defaultGoal>
-<!--        <resources>
+        <resources>
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
@@ -112,6 +112,13 @@
                 </includes>
                 <filtering>false</filtering>
             </resource>
-        </resources>-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 </project>

@@ -13,12 +13,12 @@
         <result column="update_by" property="updateBy" jdbcType="BIGINT"></result>
         <result column="update_date_time" property="updateDateTime" jdbcType="TIMESTAMP"></result>
     </resultMap>
-    <sql id="all_dict_column">
+    <sql id="all_shortlink_column">
         id, short_key, original_url, expire_date_time, biz_type, delete_flag, create_by, create_date_time, update_by, update_date_time
     </sql>
 
     <insert id="insertOne" parameterType="com.javaliu.boot.modules.shortlink.entity.ShortLinkEntity">
-        INSERT INTO sms_short_link(id, id, short_key, original_url, expire_date_time, biz_type,
+        INSERT INTO sms_short_link(id, short_key, original_url, expire_date_time, biz_type, delete_flag,
         create_by, create_date_time, update_by, update_date_time)
         VALUES (${id}, #{shortKey}, #{originalUrl}, #{expireDateTime}, ${bizType}, ${deleteFlag},
         ${createBy}, #{createDateTime}, ${updateBy}, #{updateDateTime})
