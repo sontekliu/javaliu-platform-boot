@@ -1,5 +1,6 @@
-package com.javaliu.boot.base.interceptor;
+package com.javaliu.boot.common.interceptor;
 
+import com.javaliu.boot.common.context.ThreadContext;
 import com.javaliu.kit.context.GlobalThreadContext;
 import com.javaliu.kit.utils.IPUtils;
 import com.javaliu.kit.utils.IdGenUtils;
@@ -27,6 +28,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         // 清除绑定线程的数据
+        ThreadContext.getThreadInstance().remove();
         GlobalThreadContext.getThreadInstance().remove();
     }
 }

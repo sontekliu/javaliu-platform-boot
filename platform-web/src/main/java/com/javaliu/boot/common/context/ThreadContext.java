@@ -1,4 +1,4 @@
-package com.javaliu.boot.modules.common.context;
+package com.javaliu.boot.common.context;
 
 import com.javaliu.boot.modules.account.entity.AccountEntity;
 
@@ -15,7 +15,7 @@ public class ThreadContext {
      * 获取 ThreadContext 实例
      * @return
      */
-    public static final ThreadContext getInstance(){
+    public static final ThreadContext getThreadInstance(){
         ThreadContext threadContext = CONTEXT.get();
         if(null == threadContext){
             threadContext = new ThreadContext();
