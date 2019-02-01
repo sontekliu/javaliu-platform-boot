@@ -31,7 +31,7 @@ public class ShortLinkController {
         try {
             originalUrl = "https://www.baidu.com";
             shortLinkService.genShortLink(originalUrl, 1, new Date());
-            resultOne = ResultUtils.successResultOne("String");
+            resultOne = ResultUtils.successResultOne();
         } catch (ServiceWrapperException e){
             resultOne = ResultUtils.failResultOne(1, e.getMessage());
         }

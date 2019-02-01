@@ -3,7 +3,9 @@ package com.javaliu.boot.base.result;
 import com.google.gson.Gson;
 
 public abstract class AbstractResult {
-    private int flag = 0;  // 0 表示正确
+    public static final int SUCCESS = 0;
+    public static final int SYSTEM_ERROR = 9999;
+    private int flag = SUCCESS;  // 0 表示正确
     private String message;
 
     public int getFlag() {

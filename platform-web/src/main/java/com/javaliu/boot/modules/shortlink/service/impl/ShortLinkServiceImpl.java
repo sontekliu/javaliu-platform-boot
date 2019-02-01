@@ -1,7 +1,7 @@
 package com.javaliu.boot.modules.shortlink.service.impl;
 
 import com.javaliu.boot.base.exception.wrapper.ServiceWrapperException;
-import com.javaliu.boot.kit.IdGenUtils;
+import com.javaliu.kit.utils.IdGenUtils;
 import com.javaliu.boot.modules.shortlink.entity.ShortLinkEntity;
 import com.javaliu.boot.modules.shortlink.kit.Base62;
 import com.javaliu.boot.modules.shortlink.mapper.ShortLinkMapper;

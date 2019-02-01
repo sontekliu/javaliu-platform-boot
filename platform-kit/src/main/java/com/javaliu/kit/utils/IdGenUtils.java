@@ -1,4 +1,4 @@
-package com.javaliu.boot.kit;
+package com.javaliu.kit.utils;
 
 import java.util.UUID;
 

@@ -2,6 +2,11 @@ package com.javaliu.boot.base.result;
 
 public class ResultUtils {
 
+    public static ResultOne successResultOne(){
+        ResultOne resultOne = new ResultOne<>();
+        resultOne.setFlag(AbstractResult.SUCCESS);
+        return resultOne;
+    }
     public static ResultOne successResultOne(Object t){
         ResultOne resultOne = new ResultOne<>();
         resultOne.setResult(t);

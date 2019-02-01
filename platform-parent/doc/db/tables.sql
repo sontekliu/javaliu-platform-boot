@@ -1,18 +1,14 @@
 -- 用户表
-DROP TABLE IF EXISTS sys_user;
-CREATE TABLE `sys_user` (
+DROP TABLE IF EXISTS sys_account;
+CREATE TABLE `sys_account` (
   `id` bigint(32) NOT NULL COMMENT '主键ID',
+  `code` varchar(64) NOT NULL COMMENT '登录用户名',
   `email` varchar(128) NOT NULL COMMENT 'Email地址',
-  `code` varchar(64) DEFAULT NULL COMMENT '登录用户名',
-  `name` varchar(64) DEFAULT NULL COMMENT '用户昵称',
-  `password` char(40) DEFAULT NULL COMMENT '密码',
+  `nick_name` varchar(64) NOT NULL COMMENT '用户昵称',
+  `password` char(40) NOT NULL COMMENT '密码',
   `salt`  CHAR(8) NOT NULL COMMENT '盐',
-  `sex` int DEFAULT '0' COMMENT '性别',
-  `year` int DEFAULT NULL COMMENT '年份',
-  `month` int DEFAULT NULL COMMENT '月份',
-  `day` int DEFAULT NULL COMMENT '日期',
-  `header_pic` VARCHAR(64) DEFAULT NULL COMMENT '头像地址',
-  `status` char(1) DEFAULT NULL COMMENT '状态',
+  `head_image` VARCHAR(128) NOT NULL COMMENT '头像地址',
+  `status` int DEFAULT 0 COMMENT '状态,0:正常',
   `delete_flag` int DEFAULT '0' COMMENT '删除标识',
   `create_by` bigint(32) NOT NULL COMMENT '创建人',
   `create_date_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -28,8 +24,7 @@ CREATE TABLE `sys_log` (
   `action` varchar(64) NOT NULL COMMENT '操作内容',
   `action_form` varchar(64) NOT NULL COMMENT '来自哪儿的操作，Web页面还是SDK接口调用',
   `ip_address` varchar(64) NOT NULL COMMENT 'IP地址',
-  `user_id` bigint(32) NOT NULL COMMENT '操作人',
-  `user_code` bigint(64) NOT NULL COMMENT '操作人登录账号',
+  `account_id` bigint(64) NOT NULL COMMENT '操作人登录账号',
   `create_date_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `delete_flag` int DEFAULT '0' COMMENT '删除标识',
   PRIMARY KEY (`id`)

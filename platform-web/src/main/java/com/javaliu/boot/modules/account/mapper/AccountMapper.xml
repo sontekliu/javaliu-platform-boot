@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javaliu.boot.modules.account.mapper.AccountMapper">
+    <resultMap id="account" type="com.javaliu.boot.modules.account.entity.AccountEntity">
+        <id column="id" property="id" jdbcType="BIGINT"></id>
+        <result column="code" property="code" jdbcType="VARCHAR"></result>
+        <result column="email" property="email" jdbcType="VARCHAR"></result>
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR"></result>
+        <result column="password" property="password" jdbcType="VARCHAR"></result>
+        <result column="salt" property="salt" jdbcType="CHAR"></result>
+        <result column="head_image" property="headImage" jdbcType="VARCHAR"></result>
+        <result column="status" property="status" jdbcType="INTEGER"></result>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"></result>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"></result>
+        <result column="create_date_time" property="createDateTime" jdbcType="TIMESTAMP"></result>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"></result>
+        <result column="update_date_time" property="updateDateTime" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+    <sql id="all_account_column">
+        id, code, email, nick_name, password, salt, head_image, status, delete_flag, create_by,
+        create_date_time, update_by, update_date_time
+    </sql>
+
+    <insert id="insertOne" parameterType="com.javaliu.boot.modules.account.entity.AccountEntity">
+        INSERT INTO sys_account(id, code, email, nick_name, password, salt, head_image, status, delete_flag,
+        create_by, create_date_time, update_by, update_date_time)
+        VALUES (${id}, #{code}, #{email}, #{nickName}, #{password}, #{salt}, #{head_image}, ${status},
+         ${deleteFlag}, ${createBy}, #{createDateTime}, ${updateBy}, #{updateDateTime})
+    </insert>
+</mapper>

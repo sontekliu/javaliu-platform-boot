@@ -3,7 +3,7 @@
  * <br> 文件名：SnowFlake.java
  * <br> Copyright 2017 Javaliu
  */
-package com.javaliu.boot.kit;
+package com.javaliu.kit.utils;
 
 /**
  * <br> 类 名：SnowFlake
