@@ -1,6 +1,7 @@
 package com.javaliu.boot.modules.shortlink.service.impl;
 
 import com.javaliu.boot.base.exception.wrapper.ServiceWrapperException;
+import com.javaliu.boot.common.utils.BaseEntityUtils;
 import com.javaliu.kit.utils.IdGenUtils;
 import com.javaliu.boot.modules.shortlink.entity.ShortLinkEntity;
 import com.javaliu.boot.modules.shortlink.kit.Base62;
@@ -45,10 +46,7 @@ public class ShortLinkServiceImpl implements IShortLinkService {
         shortLinkEntity.setBizType(bizType);
         shortLinkEntity.setExpireDateTime(expireDateTime);
         // 待优化部分
-        shortLinkEntity.setCreateBy(1L);
-        shortLinkEntity.setCreateDateTime(new Date());
-        shortLinkEntity.setUpdateBy(1L);
-        shortLinkEntity.setUpdateDateTime(new Date());
+        BaseEntityUtils.setBaseParam(shortLinkEntity);
         try{
             shortLinkMapper.insertOne(shortLinkEntity);
         } catch (Exception e){
