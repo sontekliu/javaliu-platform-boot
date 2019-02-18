@@ -23,4 +23,7 @@
         VALUES (${id}, #{shortKey}, #{originalUrl}, #{expireDateTime}, ${bizType}, ${deleteFlag},
         ${createBy}, #{createDateTime}, ${updateBy}, #{updateDateTime})
     </insert>
+    <select id="selectOneBy" parameterType="java.lang.String" resultMap="shortLink">
+        SELECT <include refid="all_shortlink_column" /> FROM sms_short_link WHERE short_key = #{shortKey}
+    </select>
 </mapper>

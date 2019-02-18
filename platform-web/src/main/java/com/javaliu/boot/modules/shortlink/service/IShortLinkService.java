@@ -14,4 +14,11 @@ public interface IShortLinkService {
      * @return
      */
     public ShortLinkEntity genShortLink(String originalUrl, int bizType, Date expireDateTime);
+
+    /**
+     * 查询短连接
+     * @param key       短连接 Key
+     * @return
+     */
+    public String lookup(String key);
 }

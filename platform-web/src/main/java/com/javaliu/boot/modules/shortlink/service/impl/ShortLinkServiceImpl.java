@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ShortLinkServiceImpl implements IShortLinkService {
@@ -40,6 +42,8 @@ public class ShortLinkServiceImpl implements IShortLinkService {
         ShortLinkEntity shortLinkEntity = new ShortLinkEntity();
         long id = IdGenUtils.genDefaultSequenceId();
         shortLinkEntity.setId(id);
+        // 将ID每隔 5 位插入一个随时数0,1，直到高位全部是 0 为止。
+        id = Base62.insertRandomBitPer5Bits(id);
         String shortKey = Base62.toBase62(id);
         shortLinkEntity.setShortKey(shortKey);
         shortLinkEntity.setOriginalUrl(originalUrl);
@@ -54,5 +58,16 @@ public class ShortLinkServiceImpl implements IShortLinkService {
             throw new ServiceWrapperException("保存短连接数据异常", e);
         }
         return shortLinkEntity;
+    }
+
+    @Override
+    public String lookup(String key) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("shortKey", key);
+        ShortLinkEntity shortLinkEntity = shortLinkMapper.selectOneBy(params);
+        if(null == shortLinkEntity){
+            return null;
+        }
+        return shortLinkEntity.getOriginalUrl();
     }
 }
